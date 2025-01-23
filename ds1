@@ -1,0 +1,10 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parts 1 to 4
+x = np.linspace(0,1,50)
+y = np.log(x)
+z = np.exp(x)
+plt.scatter(x,y)
+plt.scatter(x,z)
+plt.show()
