@@ -1,3 +1,4 @@
+# Question 1
 Job Title,Median Annual Salary,Educational Requirments,Work Experience,Job outlook,Employment Change
 Data Scientist,"$108,020",Bachelor's degree,Not required,36%,73100
 Investment Banking,"$76,900",Bachelor's degree,Not required,7%,34100
@@ -8,3 +9,34 @@ Financial Analyst,"$99,890",Bachelor's degree,Not required,9%,37900
 Physicians and Surgeons,"$239,200",Doctoral or professional degree,Not required,4%,34500
 # One thing that surprised me is that investment banking actually has the second lowest salary. I picked physicans to be the best job because it
 # is the one that has highest salary and average increase rate. 
+
+# Question 4
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x):
+    y = 100-2*x**2+3*x
+    return(y)
+
+def maximizer(a,b,N,f,showplot=False):
+    x = np.linspace(a,b,N) 
+    y = f(x) 
+    if showplot == True:
+        plt.scatter(x,y)
+        plt.show()
+    #
+    maximum = max(y) 
+    max_index = np.where(maximum==y) 
+    maximizer = x[max_index] 
+    return({'maximum':maximum,'maximizer':maximizer})
+
+a = -1
+b = 1
+
+print(maximizer(a,b,3,f,showplot=True))
+print(maximizer(a,b,10,f,showplot=True))
+print(maximizer(a,b,100,f,showplot=True))
+print(maximizer(a,b,1000,f))
+print(maximizer(a,b,5000,f))
+
+f(.75) 
