@@ -10,33 +10,42 @@ Physicians and Surgeons,"$239,200",Doctoral or professional degree,Not required,
 # One thing that surprised me is that investment banking actually has the second lowest salary. I picked physicans to be the best job because it
 # is the one that has highest salary and average increase rate. 
 
-# Question 4
+# Question 3
 import numpy as np
-import matplotlib.pyplot as plt
 
-def f(x):
-    y = 100-2*x**2+3*x
-    return(y)
+def mean(x):
+    return np.sum(x) / len(x)
 
-def maximizer(a,b,N,f,showplot=False):
-    x = np.linspace(a,b,N) 
-    y = f(x) 
-    if showplot == True:
-        plt.scatter(x,y)
-        plt.show()
-    #
-    maximum = max(y) 
-    max_index = np.where(maximum==y) 
-    maximizer = x[max_index] 
-    return({'maximum':maximum,'maximizer':maximizer})
+def std_dev(x):
+    x_mean = mean(x)
+    return np.sqrt(np.sum((x - x_mean) ** 2) / (len(x) - 1))
 
-a = -1
-b = 1
+def z_scores(x):
+    x_mean = mean(x)
+    x_std = std_dev(x)
+    return (x - x_mean) / x_std
 
-print(maximizer(a,b,3,f,showplot=True))
-print(maximizer(a,b,10,f,showplot=True))
-print(maximizer(a,b,100,f,showplot=True))
-print(maximizer(a,b,1000,f))
-print(maximizer(a,b,5000,f))
+def covariance(x, y):
+    x_mean, y_mean = mean(x), mean(y)
+    return np.sum((x - x_mean) * (y - y_mean)) / (len(x) - 1)
 
-f(.75) 
+def correlation(x, y):
+    return covariance(x, y) / (std_dev(x) * std_dev(y))
+
+np.random.seed(42)
+x = np.random.randn(100)
+y = np.random.randn(100)
+
+mean_x = mean(x)
+std_x = std_dev(x)
+z_x = z_scores(x)
+cov_xy = covariance(x, y)
+corr_xy = correlation(x, y)
+
+# Display results
+print("Mean of x:", mean_x)
+print("Standard Deviation of x:", std_x)
+print("First 5 Z-scores of x:", z_x[:5])
+print("Covariance of x and y:", cov_xy)
+print("Correlation of x and y:", corr_xy)
+
